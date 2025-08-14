@@ -1,93 +1,112 @@
-import React from 'react';
-import {
-  FaJava, FaReact, FaAngular, FaHtml5, FaCss3Alt, FaDatabase,
-  FaAws, FaBug, FaGitAlt, FaCloud, FaTools, FaCode, FaLinux
-} from 'react-icons/fa';
-import {
-  SiSpringboot, SiJenkins, SiDocker, SiKubernetes, SiMongodb,
-  SiPostgresql, SiMysql, SiTypescript, SiJson, SiRedux,
-  SiSelenium, SiGraphql, SiBitbucket
-} from 'react-icons/si';
+// src/components/Skills.jsx
+import React from "react";
+
+/** ——— Icon discs (clean SVG, always crisp) ——— */
+const IconDisc = ({ children, gradient }) => (
+  <div
+    className={`relative h-12 w-12 shrink-0 rounded-xl bg-gradient-to-br ${gradient} shadow-md`}
+    aria-hidden="true"
+  >
+    <div className="absolute inset-0 rounded-xl overflow-hidden">
+      <div className="absolute -inset-2 rounded-[1rem] bg-white/20 blur-md" />
+    </div>
+    <div className="relative h-full w-full grid place-items-center text-white">{children}</div>
+  </div>
+);
+
+const ServerGlyph = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="4" width="18" height="6" rx="2" stroke="currentColor" strokeWidth="1.8"/>
+    <rect x="3" y="14" width="18" height="6" rx="2" stroke="currentColor" strokeWidth="1.8"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </svg>
+);
+
+const LaptopGlyph = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <rect x="4" y="5" width="16" height="10" rx="2" stroke="currentColor" strokeWidth="1.8"/>
+    <rect x="3" y="17" width="18" height="2.5" rx="1.2" fill="currentColor"/>
+  </svg>
+);
+
+const CloudGlyph = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M7 18a4 4 0 1 1 .7-7.95A5.5 5.5 0 0 1 18.2 9 3.8 3.8 0 1 1 19 17H7z" stroke="currentColor" strokeWidth="1.8" fill="none"/>
+  </svg>
+);
+
+/** ——— Data ——— */
+const categories = [
+  {
+    title: "Backend (.NET)",
+    gradient: "from-fuchsia-500 to-purple-600",
+    icon: <ServerGlyph />,
+    skills: [
+      ".NET / ASP.NET Core", "C#", "Entity Framework", "SQL Server", "Redis", "Cassandra", "SSRS",
+    ],
+    chipColor: "from-fuchsia-500 to-purple-600",
+  },
+  {
+    title: "Frontend",
+    gradient: "from-sky-500 to-indigo-600",
+    icon: <LaptopGlyph />,
+    skills: ["React", "Angular/AngularJS", "TypeScript", "JavaScript"],
+    chipColor: "from-sky-500 to-indigo-600",
+  },
+  {
+    title: "Cloud & DevOps",
+    gradient: "from-emerald-500 to-teal-600",
+    icon: <CloudGlyph />,
+    skills: ["Azure", "AWS", "Docker", "Kubernetes", "Jenkins", "Azure DevOps"],
+    chipColor: "from-emerald-500 to-teal-600",
+  },
+];
 
 export default function Skills() {
-  const categories = [
-    {
-      title: 'Frontend',
-      color: 'text-pink-600',
-      skills: [
-        { name: 'React.js', icon: <FaReact className="text-blue-500" /> },
-        { name: 'Angular', icon: <FaAngular className="text-red-600" /> },
-        { name: 'HTML5 / CSS3', icon: <FaHtml5 className="text-orange-600" /> },
-        { name: 'TypeScript / JS', icon: <SiTypescript className="text-blue-700" /> },
-        { name: 'Redux / JSON', icon: <SiRedux className="text-purple-600" /> },
-      ],
-    },
-    {
-      title: 'Backend',
-      color: 'text-blue-600',
-      skills: [
-        { name: 'Java / Core Java', icon: <FaJava className="text-red-700" /> },
-        { name: 'Spring Boot / JPA', icon: <SiSpringboot className="text-green-600" /> },
-        { name: 'REST APIs / GraphQL', icon: <SiGraphql className="text-pink-600" /> },
-        { name: 'Multithreading / JDBC', icon: <FaCode className="text-gray-700" /> },
-      ],
-    },
-    {
-      title: 'Database',
-      color: 'text-green-600',
-      skills: [
-        { name: 'PostgreSQL / MySQL', icon: <SiPostgresql className="text-blue-600" /> },
-        { name: 'MongoDB', icon: <SiMongodb className="text-green-700" /> },
-        { name: 'Oracle / PL-SQL', icon: <FaDatabase className="text-indigo-700" /> },
-      ],
-    },
-    {
-      title: 'DevOps & Cloud',
-      color: 'text-yellow-600',
-      skills: [
-        { name: 'Docker / Kubernetes', icon: <SiDocker className="text-blue-600" /> },
-        { name: 'Jenkins / CI-CD', icon: <SiJenkins className="text-pink-600" /> },
-        { name: 'AWS / Azure / GCP', icon: <FaAws className="text-yellow-500" /> },
-        { name: 'Bitbucket / Git', icon: <SiBitbucket className="text-blue-700" /> },
-      ],
-    },
-    {
-      title: 'Testing & Tools',
-      color: 'text-purple-600',
-      skills: [
-        { name: 'JUnit / Mockito / TestNG', icon: <FaBug className="text-green-600" /> },
-        { name: 'Selenium / JMeter', icon: <SiSelenium className="text-indigo-700" /> },
-        { name: 'Linux / Bash', icon: <FaLinux className="text-black" /> },
-        { name: 'IntelliJ / VS Code', icon: <FaTools className="text-gray-700" /> },
-      ],
-    },
-  ];
-
   return (
-    <section id="skills" className="py-20 px-6 bg-gray-50 text-gray-800" data-aos="fade-up">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-teal-700">Technical Skills</h2>
-        </div>
+    <section id="skills" className="py-20 bg-gradient-to-b from-white via-purple-50/40 to-white">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <h2 className="section-title">Skills</h2>
+        <p className="mt-2 text-lg text-gray-600">Crafting solutions with these technologies.</p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {categories.map((cat, idx) => (
-            <div
-              key={cat.title}
-              className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-shadow duration-300"
-              data-aos="zoom-in"
-              data-aos-delay={idx * 100}
+        <div className="mt-8 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {categories.map((c) => (
+            <article
+              key={c.title}
+              className="card p-6 hover:shadow-lg hover:-translate-y-0.5 transition"
             >
-              <h3 className={`text-xl font-bold mb-4 ${cat.color}`}>{cat.title}</h3>
-              <ul className="space-y-3">
-                {cat.skills.map((skill, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition">
-                    <span className="text-2xl">{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </li>
+              {/* Header */}
+              <div className="flex items-center gap-3">
+                <IconDisc gradient={c.gradient}>{c.icon}</IconDisc>
+                <h3 className="text-lg font-bold text-gray-900">{c.title}</h3>
+              </div>
+
+              {/* Accent line */}
+              <div className={`mt-4 h-1 w-20 rounded-full bg-gradient-to-r ${c.chipColor} transition-all group-hover:w-24`} />
+
+              {/* Chips */}
+              <div className="mt-4 flex flex-wrap gap-2">
+                {c.skills.map((s) => (
+                  <span
+                    key={s}
+                    className={`chip border-transparent bg-white text-gray-900 ring-1 ring-inset 
+                                ${/* gradient border via background-clip trick */""}
+                                inline-flex items-center`}
+                    style={{
+                      backgroundImage: `linear-gradient(white,white), linear-gradient(90deg, var(--from), var(--to))`,
+                      backgroundOrigin: "border-box",
+                      backgroundClip: "padding-box,border-box",
+                      // pass Tailwind colors as CSS vars for each card
+                      ["--from"]: "color-mix(in oklab, rgb(236 72 153) 1, transparent)", // default
+                      ["--to"]: "color-mix(in oklab, rgb(147 51 234) 1, transparent)",
+                    }}
+                  >
+                    {s}
+                  </span>
                 ))}
-              </ul>
-            </div>
+              </div>
+            </article>
           ))}
         </div>
       </div>

@@ -1,79 +1,59 @@
-import React from 'react';
-import { FaBriefcase } from 'react-icons/fa';
+import React from "react";
+
+const jobs = [
+  {
+    company: "McKesson, USA",
+    title: ".NET Developer",
+    period: "Jan 2023 – Present",
+    bullets: [
+      "Migrated legacy research apps to .NET Core → 35% faster response time.",
+      "Tuned SQL Server & Cassandra → 55% lower query latency for real-time analytics.",
+      "Automated CI/CD (Git, Jenkins, Docker, Azure DevOps) → 65% shorter release cycles.",
+      "HIPAA-compliant migration (1.5M+ patient records) with zero data loss.",
+      "ASP.NET Identity RBAC (21 CFR Part 11) • Better observability → ~50% faster incident resolution."
+    ],
+    accent: "from-pink-500 to-rose-500"
+  },
+  {
+    company: "Intex Technologies, India",
+    title: ".NET Developer",
+    period: "Feb 2019 – Dec 2022",
+    bullets: [
+      "Built financial web apps (ASP.NET MVC, C#, JS) → +20% user engagement.",
+      "Integrated payment/data provider APIs → +35% satisfaction; less manual entry.",
+      "Optimized SQL Server schemas → 45% faster transactions; SSRS dashboards.",
+      "Redis/MemoryCache → ~40% faster responses; lower infra costs.",
+      "Security with OAuth2/JWT • CI/CD in Azure DevOps & Git → +50% release frequency."
+    ],
+    accent: "from-cyan-500 to-indigo-500"
+  }
+];
 
 export default function Experience() {
-  const experiences = [
-    {
-      role: 'Full Stack Java Developer',
-      company: 'AT&T Services Inc., USA',
-      date: 'Jan 2023 – Present',
-      techStack: ['Java', 'Spring Boot', 'React', 'GraphQL', 'Docker', 'Kubernetes', 'AWS', 'Azure', 'MongoDB', 'Neo4j'],
-      points: [
-        'Replaced legacy systems with Spring Boot microservices to improve scalability.',
-        'Built APIs with REST/GraphQL for telecom platforms.',
-        'Created dynamic UIs using React and Angular.',
-        'Used Docker, Kubernetes, and Jenkins for cloud-native deployments.',
-        'Integrated Neo4j for graph-based network visualization.',
-      ],
-    },
-    {
-      role: 'Java Developer',
-      company: 'Intex Technologies Ltd, India',
-      date: 'Feb 2019 – Aug 2021',
-      techStack: ['Java', 'Spring Boot', 'MySQL', 'React', 'AWS', 'Selenium'],
-      points: [
-        'Developed backend services and REST APIs using Spring Boot.',
-        'Worked with React for building responsive UI components.',
-        'Optimized SQL queries and indexing strategies.',
-        'Deployed apps on AWS with EC2, Lambda, and S3.',
-        'Automated UI tests with Selenium WebDriver.',
-      ],
-    },
-  ];
-
   return (
-    <section id="experience" className="bg-gradient-to-b from-purple-100 to-violet-200 py-20 px-4 text-slate-800">
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex justify-center text-5xl text-blue-900 mb-4 animate-pulse">
-            <FaBriefcase />
-          </div>
-          <h2 className="text-4xl font-extrabold text-violet-800">Work Experience</h2>
-          <p className="text-md text-purple-700 mt-2">Here’s a glimpse into my professional journey</p>
-        </div>
-
-        {/* Experience Cards */}
-        {experiences.map((exp, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl border-l-4 border-violet-600 shadow-md mb-10 p-6 transition-all duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-[1.02] hover:shadow-violet-400 hover:shadow-lg group"
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
+    <section id="experience" className="py-16">
+      <h2 className="section-title">Experience</h2>
+      <hr className="mt-3 hr-gradient" />
+      <div className="mt-8 grid gap-6">
+        {jobs.map((j, idx) => (
+          <article
+            key={j.company}
+            className="card p-6 animate-slideUp"
+            style={{ animationDelay: `${idx * 120}ms` }}
           >
-            <p className="text-sm text-violet-600 font-medium">{exp.date}</p>
-            <h3 className="text-xl font-bold text-slate-800 mt-1 group-hover:text-violet-800">{exp.role}</h3>
-            <p className="text-md italic text-purple-700 mb-4">{exp.company}</p>
-
-            {/* Tech Stack Tags */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {exp.techStack.map((tech, idx) => (
-                <span
-                  key={idx}
-                  className="bg-indigo-100 text-indigo-800 group-hover:bg-indigo-200 group-hover:text-indigo-900 text-xs font-medium px-3 py-0.5 rounded-full transition-all duration-300"
-                >
-                  {tech}
-                </span>
-              ))}
+            <div className={`h-1.5 w-24 rounded-full bg-gradient-to-r ${j.accent}`} />
+            <div className="mt-4 flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-xl font-semibold">
+                {j.title} • <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">{j.company}</span>
+              </h3>
+              <span className="text-sm text-gray-500">{j.period}</span>
             </div>
-
-            {/* Bullet Points */}
-            <ul className="list-disc list-inside text-slate-700 text-sm space-y-1">
-              {exp.points.map((point, i) => (
-                <li key={i}>{point}</li>
+            <ul className="mt-4 list-disc pl-5 space-y-2 text-gray-700">
+              {j.bullets.map((b, i) => (
+                <li key={i} className="transition hover:translate-x-0.5">{b}</li>
               ))}
             </ul>
-          </div>
+          </article>
         ))}
       </div>
     </section>

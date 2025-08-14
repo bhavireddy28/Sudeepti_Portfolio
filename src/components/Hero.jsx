@@ -1,138 +1,78 @@
-import React, { useState, useEffect } from "react";
-import {
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaDownload,
-  FaTools,
-} from "react-icons/fa";
+import React from "react";
 
-const Hero = () => {
-  const skills = [
-    "Java",
-    "Spring Boot",
-    "React",
-    "MongoDB",
-    "SQL",
-    "Docker",
-    "Azure",
-    "AWS",
-  ];
-
-  const [radius, setRadius] = useState(140);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setRadius(window.innerWidth < 768 ? 100 : 140);
-    };
-    handleResize(); // call initially
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+export default function Hero() {
   return (
-    <section className="relative bg-gradient-to-r from-indigo-50 to-purple-50 px-4 py-36 md:px-20 md:py-28 flex flex-col md:flex-row items-center justify-center min-h-[850px] overflow-x-hidden gap-20">
+    <section
+      id="home"
+      className="relative isolate bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 pt-20 pb-28 min-h-[80vh] flex items-center"
+    >
+      {/* Gradient accents */}
+      <div className="pointer-events-none absolute -top-32 -left-32 h-80 w-80 rounded-full bg-pink-400/40 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-cyan-400/40 blur-3xl" />
 
-      {/* Content Column */}
-      <div className="max-w-xl text-left z-10">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-          Hi, I’m <span className="text-green-700">Yashwanth</span> <br />
-          <span className="text-green-800">Reddy</span>
-        </h1>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+        {/* LEFT CONTENT */}
+        <div>
+          <p className="mb-4 text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
+            I’m Sudeepti
+          </p>
 
-        <h2 className="text-base md:text-lg font-semibold text-indigo-700 mb-4">
-          Full Stack Java Developer • Microservices • Cloud
-        </h2>
+          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+            Full-stack .NET developer delivering scalable, secure, and fast web apps.
+          </h1>
 
-        <p className="text-gray-700 leading-relaxed mb-6 font-medium">
-          I’m a Full Stack Java Developer with 4+ years of experience building
-          scalable enterprise-grade applications using Java, Spring Boot, and
-          React. I focus on delivering secure REST APIs, scalable CI/CD
-          pipelines, and cloud deployment on AWS and Azure.
-        </p>
+          <p className="mt-5 max-w-xl text-lg text-white/90">
+            5+ years in pharma & finance — performance engineering, CI/CD, and
+            audit-ready systems.
+          </p>
 
-        <div className="text-gray-800 space-y-2 mb-6">
-          <div className="flex items-center">
-            <FaMapMarkerAlt className="mr-2 text-emerald-600" /> Atlanta, GA
-          </div>
-          <div className="flex items-center">
-            <FaPhoneAlt className="mr-2 text-emerald-600" /> (470)-601-3859
-          </div>
-          <div className="flex items-center">
-            <FaEnvelope className="mr-2 text-emerald-600" />
-            yashwantharravapula@gmail.com
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              className="rounded-2xl bg-white px-5 py-3 font-semibold text-purple-700 shadow transition hover:scale-105"
+            >
+              View Projects
+            </a>
+            <a
+              href="/resume.pdf"
+              className="rounded-2xl border border-white px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-purple-700"
+            >
+              Download Resume
+            </a>
           </div>
         </div>
 
-        <a
-          href="/YashwanthReddy_Resume.pdf"
-          download
-          className="inline-flex items-center text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition-all"
-          style={{ backgroundColor: "#f97316" }}
-        >
-          Download Resume <FaDownload className="ml-2" />
-        </a>
-      </div>
-
-      {/* Spinner Column */}
-      <div className="w-full flex flex-col items-center md:w-[480px] md:justify-end md:pr-40 relative mt-20 md:mt-0 z-10">
-        <div className="relative w-[320px] h-[320px] md:w-[400px] md:h-[400px] z-0">
-
-          {/* Glowing Ring */}
-          <div className="absolute w-full h-full rounded-full bg-orange-100 blur-2xl opacity-30"></div>
-
-          {/* Center Icon */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-orange-600 text-4xl z-10">
-            <FaTools />
-          </div>
-
-          {/* Rotating Skills (visible always) */}
-          <div className="absolute left-1/2 top-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 animate-spin-slow origin-center z-0">
-            {skills.map((skill, index) => {
-              const angle = (index / skills.length) * 2 * Math.PI;
-              const x = radius * Math.cos(angle);
-              const y = radius * Math.sin(angle);
-              const rotation = -angle * (180 / Math.PI);
-
-              return (
-                <div
-                  key={skill}
-                  className="absolute text-sm px-3 py-1 text-white rounded-full shadow-md hover:scale-110 transition-all"
-                  style={{
-                    backgroundColor: "#f97316",
-                    left: `calc(50% + ${x}px)`,
-                    top: `calc(50% + ${y}px)`,
-                    transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {skill}
-                </div>
-              );
-            })}
+        {/* RIGHT: waving memoji */}
+        <div className="hidden md:flex justify-center items-center">
+          <div className="relative flex h-64 w-64 items-center justify-center rounded-full bg-white/10 backdrop-blur-md shadow-2xl ring-2 ring-yellow-300/50">
+            {/* brighter halo */}
+            <div className="pointer-events-none absolute -inset-5 rounded-full bg-gradient-to-tr from-yellow-300 via-orange-300 to-pink-300 blur-2xl opacity-90 animate-pulse" />
+            {/* waving animation */}
+            <img
+              src="/memoji-wave.png" // put this in /public
+              alt="Waving memoji"
+              className="relative h-44 w-44 object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] animate-wave"
+            />
           </div>
         </div>
       </div>
 
-      {/* Spinner Keyframes */}
+      {/* Custom animation */}
       <style jsx>{`
-        @keyframes spinEase {
-          0% {
-            transform: rotate(0deg);
-          }
-          50% {
-            transform: rotate(180deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
+        @keyframes wave {
+          0% { transform: rotate(0deg); }
+          15% { transform: rotate(14deg); }
+          30% { transform: rotate(-8deg); }
+          45% { transform: rotate(14deg); }
+          60% { transform: rotate(-4deg); }
+          75% { transform: rotate(10deg); }
+          100% { transform: rotate(0deg); }
         }
-        .animate-spin-slow {
-          animation: spinEase 20s linear infinite;
+        .animate-wave {
+          animation: wave 2s infinite;
+          transform-origin: bottom center;
         }
       `}</style>
     </section>
   );
-};
-
-export default Hero;
+}

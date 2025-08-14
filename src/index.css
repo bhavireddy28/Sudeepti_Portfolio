@@ -1,40 +1,200 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html {
-  scroll-behavior: smooth;
+
+/* Base */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 90px; }
+:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+
+/* Colorful background */
+body { @apply bg-gradient-to-b from-white via-fuchsia-50 to-pink-50 text-gray-900; }
+
+/* Container helper */
+.container { @apply mx-auto max-w-7xl px-4 md:px-6; }
+
+/* Card helper + soft shimmer border */
+.card {
+  @apply relative rounded-2xl bg-white/90 shadow-md border border-white/60 backdrop-blur;
+}
+.card::before {
+  content: "";
+  @apply absolute inset-0 rounded-2xl pointer-events-none;
+  background: linear-gradient(90deg,#a78bfa,#ec4899,#f59e0b);
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+  opacity: .08;
 }
 
+/* Buttons */
+.btn { @apply rounded-2xl px-5 py-3 font-semibold shadow transition; }
+.btn-primary { @apply bg-white text-purple-700 hover:scale-105 drop-shadow-glow; }
+.btn-ghost { @apply border border-white text-white hover:bg-white hover:text-purple-700; }
+.btn-dark { @apply bg-black text-white hover:opacity-90; }
+
+/* Section titles */
+.section-title {
+  @apply text-3xl md:text-4xl font-extrabold tracking-tight inline-block;
+  background-image: linear-gradient(90deg, #6366f1, #ec4899, #f59e0b);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textSlide 4s ease-in-out infinite;
+}
+
+/* Gradient ring utility */
+.gradient-ring {
+  position: relative;
+}
+.gradient-ring::after {
+  content: "";
+  position: absolute; inset: -6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg,#6366f1,#ec4899,#f59e0b,#22d3ee);
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: .6;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.allow-motion) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* === IMPROVEMENTS === */
+
+/* Subtle glass card w/ animated border sheen */
+.card {
+  position: relative;
+}
+.card::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 1rem; pointer-events: none;
+  background: linear-gradient(90deg,#8b5cf6,#ec4899,#f59e0b);
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
+  opacity: .07;
+}
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* Gradient divider */
+.hr-gradient {
+  height: 3px; border: 0; border-radius: 9999px;
+  background-image: linear-gradient(90deg,#6366f1,#ec4899,#f59e0b);
+  opacity: .35;
+}
+
+/* CTA buttons */
+.btn { @apply rounded-2xl px-5 py-3 font-semibold shadow transition; }
+.btn-primary { @apply bg-white text-purple-700 hover:scale-105 drop-shadow-glow; }
+.btn-ghost { @apply border border-white text-white hover:bg-white hover:text-purple-700; }
+.btn-dark { @apply bg-black text-white hover:opacity-90; }
+
+/* Fancy section title (animated gradient text) */
+.section-title {
+  @apply text-3xl md:text-4xl font-extrabold tracking-tight inline-block;
+  background-image: linear-gradient(90deg, #6366f1, #ec4899, #f59e0b);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: textSlide 4s ease-in-out infinite;
+}
+/* Animated gradient for the brand name */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-move {
+  background-size: 200% 200%;
+  animation: gradientMove 4s ease infinite;
+}
+
+.pill-btn {
+  @apply inline-flex items-center gap-2 rounded-full px-4 py-2 font-medium;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.pill-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -6px rgba(0,0,0,0.25);
+}
+
+
+
+/* crisper card hover glow (already have .card) */
+.card:hover { box-shadow: 0 20px 40px -24px rgba(99, 102, 241, .35); }
+
+/* skill chips (clean, readable, interactive) */
+.chip {
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -16px rgba(15, 23, 42, .35);
+}
+
+
+.hero-name {
+  background-image: linear-gradient(90deg, #a78bfa, #60a5fa, #f472b6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroShine 5s ease-in-out infinite;
+}
+
+@keyframes heroShine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* shimmer color for the name */
+.hero-name{
+  background-image: linear-gradient(90deg,#a78bfa,#60a5fa,#f472b6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroShine 5s ease-in-out infinite;
+}
+@keyframes heroShine {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+/* gentle scale pulse used earlier */
+@keyframes pulse-slow { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+.animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+
+/* waving hand effect for the memoji */
 @keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30%      { transform: rotate(14deg); }
+  20%, 40%      { transform: rotate(-8deg); }
 }
-
-.animate-wave {
-  animation-name: wave;
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  transform-origin: 70% 70%;
-  display: inline-block;
+.memoji-wave {
+  animation: wave 2.2s ease-in-out infinite;
+  transform-origin: 70% 70%; /* tweak if your memoji needs a different pivot */
 }
-
-
-/* Remove margin and padding at the top of Skills section */
-#skills {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Or reduce bottom margin of previous section (e.g. About) */
-#about {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-

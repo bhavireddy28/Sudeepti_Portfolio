@@ -1,31 +1,37 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from "react";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import ScrollProgress from "./components/ScrollProgressBar";
 
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
+// ...
+<div className="min-h-screen">
+  <ScrollProgress />
+  <Header />
+  {/* rest ... */}
+</div>
 
-function App() {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
+export default function App() {
   return (
-    <div className="animate-fadeIn transition-all duration-1000">
+    <div className="min-h-screen">
       <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero />
+        <div className="container">
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+        </div>
+        <Contact />
+      </main>
+      <footer className="py-10 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} Sudeepti Setti
+      </footer>
     </div>
   );
 }
-
-export default App;
